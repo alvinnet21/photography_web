@@ -2,8 +2,9 @@
 // Base URL can be overridden by Vite env `VITE_API_BASE_URL`.
 
 const VITE_ENV = (import.meta as any).env || {};
-// Absolute base URL (fixed) so it is not altered by hosting environment
-const BASE_URL: string = 'http://52.221.202.93';
+// Use same-origin base in browser. On Vercel, a serverless proxy under `/api` forwards to the backend.
+// This avoids mixed-content issues from HTTPS pages calling an HTTP API directly.
+const BASE_URL: string = '';
 const AUTH_BEARER = VITE_ENV.VITE_API_TOKEN;
 const AUTH_BASIC_USER = VITE_ENV.VITE_API_BASIC_USER;
 const AUTH_BASIC_PASS = VITE_ENV.VITE_API_BASIC_PASS;
