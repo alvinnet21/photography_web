@@ -2,9 +2,9 @@
 // Base URL can be overridden by Vite env `VITE_API_BASE_URL`.
 
 const VITE_ENV = (import.meta as any).env || {};
-// Use same-origin base in browser. On Vercel, a serverless proxy under `/api` forwards to the backend.
-// This avoids mixed-content issues from HTTPS pages calling an HTTP API directly.
-const BASE_URL: string = '';
+// Follow requested pattern: const API = `${import.meta.env.VITE_API_BASE}/api`
+// Allow empty base for same-origin dev/prod: results in '/api'
+const API: string = `${VITE_ENV.VITE_API_BASE || ''}/api`;
 const AUTH_BEARER = VITE_ENV.VITE_API_TOKEN;
 const AUTH_BASIC_USER = VITE_ENV.VITE_API_BASIC_USER;
 const AUTH_BASIC_PASS = VITE_ENV.VITE_API_BASIC_PASS;
@@ -49,7 +49,9 @@ async function request<T = any>(
     headers['X-CSRF-TOKEN'] = xsrf;
   }
 
-  const res = await fetch(`${BASE_URL}${path}`, {
+  // Normalize to avoid double '/api' when callers pass '/api/...'
+  const normalizedPath = path.startsWith('/api') ? path.slice(4) : path;
+  const res = await fetch(`${API}${normalizedPath}`, {
     method,
     headers,
     credentials: WITH_CREDENTIALS ? 'include' : 'same-origin',

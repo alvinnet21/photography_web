@@ -3,14 +3,14 @@
 
 export default async function handler(req, res) {
   try {
-    const targetBase = 'http://52.221.202.93';
+    const targetBase = 'http://13.213.63.82';
     // Preserve the original path and query (starts with /api/...)
     const targetUrl = targetBase + req.url;
 
     // Clone headers and adjust Host
     const headers = { ...req.headers };
     delete headers['accept-encoding'];
-    headers['host'] = '52.221.202.93';
+    headers['host'] = '13.213.63.82';
 
     const method = req.method || 'GET';
     const isBodyless = method === 'GET' || method === 'HEAD';
