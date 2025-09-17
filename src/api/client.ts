@@ -2,8 +2,8 @@
 // Base URL can be overridden by Vite env `VITE_API_BASE_URL`.
 
 const VITE_ENV = (import.meta as any).env || {};
-// Prefer relative base so Vite dev proxy can handle CORS; override via VITE_API_BASE_URL
-const BASE_URL = VITE_ENV.VITE_API_BASE_URL ?? '';
+// Absolute base URL (fixed) so it is not altered by hosting environment
+const BASE_URL: string = 'http://52.221.202.93';
 const AUTH_BEARER = VITE_ENV.VITE_API_TOKEN;
 const AUTH_BASIC_USER = VITE_ENV.VITE_API_BASIC_USER;
 const AUTH_BASIC_PASS = VITE_ENV.VITE_API_BASIC_PASS;
