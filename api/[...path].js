@@ -3,7 +3,7 @@
 
 export default async function handler(req, res) {
   try {
-    const targetBase = 'http://13.213.63.82';
+    const targetBase = 'https://13.213.63.82';
     // Preserve the original path and query (starts with /api/...)
     const targetUrl = targetBase + req.url;
 
