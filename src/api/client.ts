@@ -2,9 +2,8 @@
 // Base URL can be overridden by Vite env `VITE_API_BASE_URL`.
 
 const VITE_ENV = (import.meta as any).env || {};
-// Follow requested pattern: const API = `${import.meta.env.VITE_API_BASE}/api`
-// Allow empty base for same-origin dev/prod: results in '/api'
-const API: string = `${VITE_ENV.VITE_API_BASE || ''}/api`;
+// Fixed absolute base API URL as requested
+const API: string = 'https://13.213.63.82/api';
 const AUTH_BEARER = VITE_ENV.VITE_API_TOKEN;
 const AUTH_BASIC_USER = VITE_ENV.VITE_API_BASIC_USER;
 const AUTH_BASIC_PASS = VITE_ENV.VITE_API_BASIC_PASS;
